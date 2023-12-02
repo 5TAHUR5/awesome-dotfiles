@@ -3,20 +3,10 @@ local wibox = require("wibox")
 local gears = require("gears")
 local helpers = require("helpers")
 local beautiful = require("beautiful")
-local pampath = require("gears").filesystem.get_configuration_dir() .. "liblua_pam.so"
-local pam = require("liblua_pam")
 local dpi = require('beautiful').xresources.apply_dpi
 require("ui.theme_launcher.content_settings")
 
 screen.connect_signal("request::desktop_decoration", function(s)
-
--- authentication --
-
-awful.spawn.easy_async_with_shell("stat "..pampath.." >/dev/null 2>&1", function (_, _, _, exitcode)
-		authenticate = function(password)
-			return pam.auth_current_user(password)
-		end
-end)
 
 -- variables --
 
@@ -126,6 +116,25 @@ local function fail()
 	prompt.markup = helpers.ui.colorizeText("try again...", beautiful.background_accent)
 end
 
+-- Try password
+local function try_password(pass)
+	awful.spawn.easy_async({"sh", "-c", "echo " .. pass .. " | sudo -S echo testing_password"}, function(stdout)
+		if  string.find(stdout, "testing_password") then
+			naughty.notification {
+				urgency = "critical",
+				title   = "correct",
+				message = "passord",
+			}
+		else
+			naughty.notification {
+				urgency = "critical",
+				title   = "incorrect",
+				message = "dont passord",
+			}
+		end
+	end)
+end
+
 -- Input
 
 local function grabpassword()
@@ -156,18 +165,20 @@ local function grabpassword()
 			end
 		end,
 		exe_callback = function(input)
-			if authenticate(input) then
-				reset()
-				if current_settings.setting_opacity == true then
-					awful.spawn.with_shell("$HOME/.config/awesome/other/picom/launch.sh --opacity")
+			awful.spawn.easy_async({"sh", "-c", "echo " .. input .. " | sudo -S echo testing_password"}, function(stdout)
+				if  string.find(stdout, "testing_password") then
+					reset()
+					if current_settings.setting_opacity == true then
+						awful.spawn.with_shell("$HOME/.config/awesome/other/picom/launch.sh --opacity")
+					else
+						awful.spawn.with_shell("$HOME/.config/awesome/other/picom/launch.sh --no-opacity")
+					end
+					main.visible = false
 				else
-					awful.spawn.with_shell("$HOME/.config/awesome/other/picom/launch.sh --no-opacity")
+					fail()
+				    grabpassword()
 				end
-				main.visible = false
-			else
-				fail()
-				grabpassword()
-			end
+			end)
 		end,
 		textbox = wibox.widget.textbox()
 	}

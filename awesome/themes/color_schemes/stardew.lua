@@ -1,6 +1,6 @@
 local color_scheme = {}
 
--- source: i am not find source
+-- source: https://github.com/TorchedSammy/dotfiles/blob/master/.config/awesome/themes/colors/stardew.lua
 color_scheme.name = "stardew"
 
 color_scheme.background = "#16161a"
