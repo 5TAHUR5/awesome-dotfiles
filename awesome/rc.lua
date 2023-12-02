@@ -2,10 +2,8 @@ pcall(require, "luarocks.loader")
 local awful = require("awful")
 require("awful.autofocus")
 local beautiful = require("beautiful")
-
-awful.spawn.with_shell("~/.config/awesome/autostart.sh")
-beautiful.init("~/.config/awesome/themes/theme.lua")
+local paths = require("helpers.paths")
+awful.spawn.with_shell(paths.to_script_autostart)
+beautiful.init(paths.to_file_beautiful_theme)
 require("config")
 require("ui")
-
---my

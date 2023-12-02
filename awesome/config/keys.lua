@@ -1,8 +1,10 @@
 local gears = require("gears")
 local awful = require("awful")
-local naughty = require("naughty")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
+local bling = require("modules.bling")
+local paths = require("helpers.paths")
+local playerctl = bling.signal.playerctl.lib()
 require("scripts")
 
 mod = "Mod4"
@@ -15,68 +17,69 @@ awful.keyboard.append_global_keybindings({
 	-- launch programms --
 
 	awful.key({ mod }, "Return", function() awful.spawn(terminal) end),
-	awful.key({ mod }, "e", function() awful.spawn("thunar") end),
-	awful.key({ mod }, "b", function() awful.spawn("librewolf") end),
-	awful.key({ mod }, "a", function() awful.spawn("telegram-desktop") end),
 	awful.key({}, "Print", function() awful.spawn("flameshot gui") end),
+	--awful.key({}, "Print", function() awful.spawn.easy_async_with_shell("sleep 3 && flameshot gui") end),
+
 
 	-- rofi -- 
 
-	awful.key({ mod }, "d", function () awful.spawn("rofi -show drun -config .config/awesome/other/rofi/configs/config.rasi") end),
-	awful.key({ mod, ctrl }, "c", function () awful.spawn("rofi -modi 'clipboard:greenclip print' -show clipboard -config  .config/awesome/other/rofi/configs/config.rasi") end),
-	awful.key({ mod, ctrl }, "p", function() awful.spawn("rofi-pass") end),
-	awful.key({ mod, ctrl }, "b", function() awful.spawn ("books") end),
-	awful.key({ mod }, "x", function () awful.spawn("powermenu") end),
-
-	-- some scripts --
-
-	awful.key({ mod }, "p", function() awful.spawn("colorpicker", false) end),
-	awful.key({ mod, ctrl }, "q", function() awful.spawn("qr_codes", false) end),
+	awful.key({ mod }, "d", function () awful.spawn("rofi -show drun -config .config/awesome/other/rofi/configs/launcher.rasi") end),
+	awful.key({ mod }, "v", function () awful.spawn("rofi -modi 'clipboard:" .. paths.to_bin_greenclip .. " print' -show clipboard -config  .config/awesome/other/rofi/configs/greenclip.rasi") end),
 
 	-- volume up/down/mute --
 
 	awful.key({}, "XF86AudioRaiseVolume", function()
-		updateVolumeSignals()
 		awesome.emit_signal("volume::set_volume", "2%+")
 		awesome.emit_signal("summon::osd")
 	end),
 	awful.key({}, "XF86AudioLowerVolume", function()
-		updateVolumeSignals()
 		awesome.emit_signal("volume::set_volume", "2%-")
 		awesome.emit_signal("summon::osd")
 	end),
 	awful.key({}, "XF86AudioMute", function()
-		updateVolumeSignals()
 		awesome.emit_signal("volume::set_volume", "toggle")
 		awesome.emit_signal("summon::osd")
+	end),
+
+	-- playerctl stop/play/next/previous
+
+	awful.key({}, "XF86AudioPause", function()
+		playerctl:play_pause()
+	end),
+	awful.key({}, "XF86AudioPlay", function()
+		playerctl:play_pause()
+	end),
+	awful.key({}, "XF86AudioPrev", function()
+		playerctl:previous()
+	end),
+	awful.key({}, "XF86AudioNext", function()
+		playerctl:next()
 	end),
 
 	-- brightness up/down --
 
 	awful.key({}, "XF86MonBrightnessUp", function()
-		awful.spawn.with_shell("brightnessctl s 5%+")
-		update_value_of_bright()
+		awesome.emit_signal("bright::set_bright", "5%+")
 		awesome.emit_signal("summon::osd")
-  end),
+    end),
 	awful.key({}, "XF86MonBrightnessDown", function()
-		awful.spawn.with_shell("brightnessctl s 5%-")
-		update_value_of_bright()
+		awesome.emit_signal("bright::set_bright", "5%-")
 		awesome.emit_signal("summon::osd")
 	end),
 
 	-- binds to widgets --
 
-	awful.key({ mod }, "m", function () awesome.emit_signal("signal::dnd") end),
-	awful.key({ mod }, "n", function () awesome.emit_signal("notif_center::open") end),
-	awful.key({ mod }, "c", function () awesome.emit_signal("time::calendar") end),
-	awful.key({ mod }, "w", function () awesome.emit_signal("profile::control") end),
+	awful.key({ mod }, "c", function () awesome.emit_signal("summon::calendar_widget") end),
+	awful.key({ mod }, "w", function () awesome.emit_signal("summon::control") end),
 	awful.key({ mod, shift }, "b", function() awesome.emit_signal("hide::bar") end),
-	awful.key({ mod }, "t", function() awesome.emit_signal("summon::systray") end),
+	awful.key({ mod }, "x", function() awesome.emit_signal("summon::powermenu") end),
 
 	-- switching a focus client -- 
 
 	awful.key({ mod }, "l", function () awful.client.focus.byidx(1) end),
 	awful.key({ mod }, "h", function () awful.client.focus.byidx(-1) end),
+	awful.key({ mod }, "Right", function () awful.client.focus.byidx(1) end),
+	awful.key({ mod }, "Left", function () awful.client.focus.byidx(-1) end),
 
 	-- focus to tag --
 
@@ -111,7 +114,7 @@ awful.keyboard.append_global_keybindings({
 
 	-- resize client --
 
-   awful.key({ mod, ctrl }, "k", function(c)
+    awful.key({ mod, ctrl }, "k", function(c)
 		helpers.client.resize_client(client.focus, "up")
 	end),
 	awful.key({ mod, ctrl }, "j", function(c)
@@ -124,22 +127,35 @@ awful.keyboard.append_global_keybindings({
 		helpers.client.resize_client(client.focus, "right")
 	end),
 
+	awful.key({ mod, ctrl }, "Up", function(c)
+		helpers.client.resize_client(client.focus, "up")
+	end),
+	awful.key({ mod, ctrl }, "Down", function(c)
+		helpers.client.resize_client(client.focus, "down")
+	end),
+	awful.key({ mod, ctrl }, "Left", function(c)
+		helpers.client.resize_client(client.focus, "left")
+	end),
+	awful.key({ mod, ctrl }, "Right", function(c)
+		helpers.client.resize_client(client.focus, "right")
+	end),
+
 	-- change padding tag on fly --
 
 	awful.key({ mod, shift }, "=", function()
-		helpers.client.resize_padding(5)
+		helpers.client.resize_padding(beautiful.useless_gap)
 	end),
 	awful.key({ mod, shift }, "-", function()
-		helpers.client.resize_padding(-5)
+		helpers.client.resize_padding(-beautiful.useless_gap)
 	end),
 
 	-- change useless gap on fly --
 
 	awful.key({ mod }, "=", function()
-		helpers.client.resize_gaps(5)
+		helpers.client.resize_gaps(beautiful.useless_gap)
 	end),
 	awful.key({ mod }, "-", function()
-		helpers.client.resize_gaps(-5)
+		helpers.client.resize_gaps(-beautiful.useless_gap)
 	end),
 
 })
@@ -167,14 +183,16 @@ client.connect_signal("request::default_keybindings", function()
 awful.keyboard.append_client_keybindings({
 	awful.key({ mod }, "f",
 		function (c)
+			awesome.emit_signal("summon::close")
 			c.fullscreen = not c.fullscreen
 			c:raise()
 		end),
 	awful.key({ mod }, "q", function (c) c:kill() end),
 	awful.key({ mod }, "s", awful.client.floating.toggle),
 
-	-- Move or swap by direction --
 
+	-- Move or swap by direction --
+	-- letters -- 
 	awful.key({ mod, shift }, "k", function(c)
 		helpers.client.move_client(c, "up")
 	end),
@@ -188,8 +206,23 @@ awful.keyboard.append_client_keybindings({
 		helpers.client.move_client(c, "right")
 	end),
 
+	-- arrows --
+	awful.key({ mod, shift }, "Up", function(c)
+		helpers.client.move_client(c, "up")
+	end),
+	awful.key({ mod, shift }, "Down", function(c)
+		helpers.client.move_client(c, "down")
+	end),
+	awful.key({ mod, shift }, "Left", function(c)
+		helpers.client.move_client(c, "left")
+	end),
+	awful.key({ mod, shift }, "Right", function(c)
+		helpers.client.move_client(c, "right")
+	end),
+
 	--- Relative move  floating client --
 
+	-- letters -- 
 	awful.key({ mod, shift, ctrl }, "j", function(c)
 		c:relative_move(0, 20, 0, 0)
 	end),
@@ -200,6 +233,20 @@ awful.keyboard.append_client_keybindings({
 		c:relative_move(-20, 0, 0, 0)
 	end),
 	awful.key({ mod, shift, ctrl }, "l", function(c)
+		c:relative_move(20, 0, 0, 0)
+	end),
+
+	-- arrows --
+	awful.key({ mod, shift, ctrl }, "Down", function(c)
+		c:relative_move(0, 20, 0, 0)
+	end),
+	awful.key({ mod, shift, ctrl }, "Up", function(c)
+		c:relative_move(0, -20, 0, 0)
+	end),
+	awful.key({ mod, shift, ctrl }, "Left", function(c)
+		c:relative_move(-20, 0, 0, 0)
+	end),
+	awful.key({ mod, shift, ctrl }, "Right", function(c)
 		c:relative_move(20, 0, 0, 0)
 	end),
 

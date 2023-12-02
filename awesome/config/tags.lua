@@ -1,7 +1,8 @@
 local awful = require("awful")
+local bling = require("modules.bling")
 
 awful.layout.layouts = {
-	awful.layout.suit.tile.left,
+    awful.layout.suit.floating,
 }
 
 screen.connect_signal("request::desktop_decoration", function(s)

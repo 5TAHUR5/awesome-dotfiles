@@ -1,14 +1,19 @@
 local awful = require("awful")
+local naughty = require("naughty")
 
 local icon = "󰃠 "
 
 function update_value_of_bright()
-	awful.spawn.easy_async_with_shell("brightnessctl i | grep Current | awk '{print $4}' | tr -d '()%'", function (stdout)
-		local value = string.gsub(stdout, '^%s*(.-)%s*$', '%1')
-		value = tonumber(value)
-		awesome.emit_signal("bright::value", value)
+	awful.spawn.easy_async({"sh", "-c", "brightnessctl i | grep Current | awk '{print $4}' | tr -d '()%'"}, function (stdout)
+		awesome.emit_signal("bright::get_bright", tonumber(stdout))
 	end)
 end
+
+awesome.connect_signal("bright::set_bright", function(set_bright)
+	awful.spawn.easy_async({"sh", "-c", "brightnessctl s " ..set_bright .. " | grep Current | awk '{print $4}' | tr -d '()%'"}, function (stdout)
+		awesome.emit_signal("bright::get_bright", tonumber(stdout))
+	end)
+end)
 
 update_value_of_bright()
 

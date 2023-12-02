@@ -1,0 +1,7 @@
+require("scripts.control_scripts.ram_forctr")
+require("scripts.control_scripts.disk_forctr")
+require("scripts.control_scripts.cpu_forctr")
+require("scripts.control_scripts.crutch_top")
+require("scripts.control_scripts.crutch_fetch")
+require("scripts.control_scripts.network")
+require("scripts.control_scripts.cputemp")

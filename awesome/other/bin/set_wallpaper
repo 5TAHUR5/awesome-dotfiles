@@ -1,0 +1,13 @@
+#!/bin/bash
+wall_path="$HOME/.walls"
+lut_path="$HOME/.config/awesome/themes/luts/"
+out="$HOME/.config/awesome/themes/wall.jpg"
+# wall="29.jpg"
+# lut="alien_blood.png"
+if [  -z "$5" ]; then
+    cp -f $2/$4 $out
+else
+    $1 apply --hald-clut $3/$5 $2/$4 -o $out
+fi
+
+feh --no-fehbg --bg-fill $out

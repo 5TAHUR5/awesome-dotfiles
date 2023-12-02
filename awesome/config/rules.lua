@@ -6,14 +6,6 @@ local ruled = require("ruled")
 ruled.client.connect_signal("request::rules", function()
 
 -- global ---------------
-
---ruled.client.append_rule {
---	id = "titlebars",
---	rule_any = { type = { "normal", "dialog" } },
---	properties = { titlebars_enabled = true }
---}
-
-
 ruled.client.append_rule {
 	id = "global",
 	rule = { },
@@ -29,30 +21,12 @@ ruled.client.append_rule {
 		end,
 	}
 }
+
 end)
 
--- user rules ---------------
-
--- ruled.client.append_rule {
--- 	rule_any = { class = { "librewolf" } },
--- 	properties = { tag = "1"}
--- }
--- ruled.client.append_rule {
--- 	rule_any = { class = { "TelegramDesktop" } },
--- 	properties = { tag = "2"}
--- }
--- ruled.client.append_rule {
--- 	rule_any = { class = { "Inkscape" } },
--- 	properties = { maximized = false }
--- }
--- ruled.client.append_rule {
--- 	rule_any = { class = { "feh", "Zathura" } },
--- 	properties = { fullscreen = true}
--- }
-
--- client.connect_signal("mouse::enter", function(c)
---     c:activate { context = "mouse_enter", raise = false }
--- end)
+client.connect_signal("mouse::enter", function(c)
+    c:activate { context = "mouse_enter", raise = false }
+end)
 
 -- Center dialogs over screen ---- 
 

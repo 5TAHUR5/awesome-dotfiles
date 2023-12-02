@@ -2,91 +2,92 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local rubato = require("modules.rubato")
+local dpi = require('beautiful').xresources.apply_dpi
 
--- osd ----------------------------
-
-local slider = wibox.widget {
-	widget = wibox.widget.progressbar,
-	max_value = 100,
-	forced_width = 380,
-	forced_height = 10,
-	shape = gears.shape.rounded_bar,
-	bar_shape = gears.shape.rounded_bar,
-	background_color = beautiful.background_urgent,
-	color = beautiful.accent,
-}
-
-local icon_widget = wibox.widget {
-	widget = wibox.widget.textbox,
-	font = beautiful.font .. " 14",
-}
-
-local text = wibox.widget {
-	widget = wibox.widget.textbox,
-	halign = "center"
-}
+-- osd --
 
 local info = wibox.widget {
-	layout = wibox.layout.fixed.horizontal,
+	widget = wibox.container.margin,
+	margins = dpi(20),
 	{
-		widget = wibox.container.margin,
-		margins = 20,
+		layout = wibox.layout.fixed.horizontal,
+		fill_space = true,
+		spacing = dpi(8),
 		{
-			layout = wibox.layout.fixed.horizontal,
-			fill_space = true,
-			spacing = 8,
-			icon_widget,
+			widget = wibox.widget.textbox,
+			id = "icon",
+			font = beautiful.font .. " 14",
+		},
+		{
+			widget = wibox.container.background,
+			forced_width = dpi(36),
 			{
-				widget = wibox.container.background,
-				forced_width = 36,
-				text,
+				widget = wibox.widget.textbox,
+				id = "text",
+				halign = "center"
 			},
-			slider,
-		}
+		},
+		{
+			widget = wibox.widget.progressbar,
+			id = "progressbar",
+			max_value = dpi(100),
+			forced_width = dpi(380),
+			forced_height = dpi(10),
+			background_color = beautiful.background_urgent,
+			color = beautiful.accent,
+		},
 	}
 }
-
 
 local osd = awful.popup {
 	visible = false,
 	ontop = true,
 	border_width = beautiful.border_width,
 	border_color = beautiful.border_color_normal,
-	minimum_height = 60,
-	maximum_height = 60,
-	minimum_width = 290,
-	maximum_width = 290,
+	minimum_height = dpi(60),
+	maximum_height = dpi(60),
+	minimum_width = dpi(290),
+	maximum_width = dpi(290),
 	placement = function(d)
-		awful.placement.bottom(d, { margins = 20 + beautiful.border_width * 2 })
+		awful.placement.bottom(d, { margins = dpi(20) + beautiful.border_width * 2 })
 	end,
 	widget = info,
 }
 
--- volume ---------------------------
+local anim = rubato.timed {
+	duration = 0.3,
+	easing = rubato.easing.linear,
+	subscribed = function(value)
+		info:get_children_by_id("progressbar")[1].value = value
+	end
+}
+
+-- volume --
 
 awesome.connect_signal("volume::get_volume", function(value, icon)
-	slider.value = value
-	text.text = value
-	icon_widget.text = icon
+	anim.target = value
+	info:get_children_by_id("text")[1].text = value
+	info:get_children_by_id("icon")[1].text = icon
 end)
 
--- bright ---------------------------
+-- bright --
 
-awesome.connect_signal("bright::value", function(value)
-	slider.value = value
-	text.text = value
-	icon_widget.text = "  "
+awesome.connect_signal("bright::get_bright", function(value)
+	anim.target = value
+	info:get_children_by_id("text")[1].text = value
+	info:get_children_by_id("icon")[1].text = ""
 end)
 
--- function -------------------------
+-- function --
 
 local function osd_hide()
 	osd.visible = false
 	osd_timer:stop()
 end
 
-local osd_timer = gears.timer{
-	timeout = 3,
+local osd_timer = gears.timer {
+	timeout = 4,
 	callback = osd_hide
 }
 
