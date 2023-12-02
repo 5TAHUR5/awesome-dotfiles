@@ -1,4 +1,4 @@
-![img](asset/awesome.png)
+![img](/asset/awesome.png)
 <br>
 # I just get [`this`](https://github.com/Sinomor/dotfiles) dotfiles, and remade
 ## This dotfiles does not affect other programs (terminal, browser, telegram) and contains only the WM setting!!!
