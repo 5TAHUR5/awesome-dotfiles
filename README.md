@@ -1,6 +1,6 @@
 ![img](assets/awesome.png)
 <br>
-# I just get [`this`](https://github.com/Sinomor/dotfiles) dotfiles, and remade
+# I just get [`this`](https://github.com/Sinomor/dotfiles) dotfiles, and remade it
 ## This dotfiles does not affect other programs (terminal, browser, telegram) and contains only the WM setting!!!
 <details>
 <summary><b>Screenshots</b></summary>
@@ -135,6 +135,15 @@ $ cd awesome-dotfiles
 $ cp -R awesome ~/.config/
 $ cp .xinitrc ~/
 ```
+##### And put your wallpapers in '~/.walls' for wallpaper launcher
+
+I recommend this wallpaper [repository](https://github.com/Sinomor/walls):
+```bash
+$ git clone --depth=1 https://github.com/Sinomor/walls.git
+$ mkdir .walls
+$ cp -r walls/* .walls/
+$ rm -r walls
+```
 
 </details>
 <details>
@@ -187,6 +196,7 @@ $ cp .xinitrc ~/
    
 </details>
 
+## If you have any problems, write to me in [telegram](https://t.me/ban_ocka). (in other social networks i rarely appear) !!!
 ***
 ### See also
 - Sinomor [dotfiles](https://github.com/Sinomor/dotfiles)
