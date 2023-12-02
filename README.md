@@ -90,7 +90,7 @@ Comments:
 ![powermenu](assets/powermenu.png)
 <hr>
 
-### Lockscreen (liblua_pam)
+### Lockscreen
 ![lockscreen](assets/lockscreen.png)
       
 </details>
@@ -128,7 +128,6 @@ Comments:
       $ cp ~/Downloads/JetBrainsMono/JetBrainsMono*.otf ~/.local/share/fonts/
       $ fc-cache -f -v
       ```
-   - If your disto is not Void linux, you need to [compile liblua pam](https://github.com/RMTT/lua-pam#complile) yourself. After that replace the liblua_pam.so file in ~/.config/awesome (for lockscreen)
 #### Install dotfiles
 ```bash
 $ git clone --depth=1 --recursive https://github.com/5TAHUR5/awesome-dotfiles.git
@@ -184,7 +183,7 @@ $ cp .xinitrc ~/
    
 - Correct dpi
 - Make the code more optimal
-- Replace the liblua_pam with a more convenient solution
+- ~~Replace the liblua_pam with a more convenient solution~~
    
 </details>
 
