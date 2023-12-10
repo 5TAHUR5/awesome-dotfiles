@@ -1,11 +1,11 @@
 ![img](assets/awesome.png)
 <br>
 # I just get [`this`](https://github.com/Sinomor/dotfiles) dotfiles, and remade it
-## This dotfiles contains only terminal (alacritty) WM setting!!!
+## This dotfiles contains only terminal (alacritty) and WM setting!!!
 <details>
 <summary><b>Screenshots</b></summary>
    
-![img](https://imgur.com/a/mF5QGql.png)
+![counter](https://imgur.com/FXBc0Uu)
 
 </details>
 <details>
