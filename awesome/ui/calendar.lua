@@ -122,7 +122,7 @@ local function mounth_next()
     calendar:set_date(date)
 end
 
-calendar:buttons{awful.button({}, 4, mounth_next), awful.button({}, 5, mounth_back)}
+calendar:buttons{awful.button({}, 5, mounth_next), awful.button({}, 4, mounth_back)}
 
 button_back:buttons{awful.button({}, 1, function()
     mounth_back()

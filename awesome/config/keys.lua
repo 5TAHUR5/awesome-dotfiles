@@ -11,7 +11,7 @@ mod = "Mod4"
 alt = "Mod1"
 ctrl = "Control"
 shift = "Shift"
-terminal = "kitty"
+terminal = "alacritty"
 
 awful.keyboard.append_global_keybindings({
 	-- launch programms --

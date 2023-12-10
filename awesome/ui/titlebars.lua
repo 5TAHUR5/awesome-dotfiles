@@ -132,12 +132,12 @@ client.connect_signal("request::titlebars", function(c)
 				{
 					layout = wibox.layout.fixed.vertical,
 					spacing = dpi(6),
-					close,
-					maximize,
-					minimize,
-					ontop,
-					floating,
-					sticky
+					awful.titlebar.widget.closebutton(c),
+					awful.titlebar.widget.maximizedbutton(c),
+					awful.titlebar.widget.minimizebutton(c),
+					awful.titlebar.widget.ontopbutton(c),
+					awful.titlebar.widget.floatingbutton(c),
+					awful.titlebar.widget.stickybutton(c),
 				}
 			}
 		},
@@ -180,7 +180,7 @@ client.connect_signal("request::titlebars", function(c)
 					ontop,
 					minimize,
 					maximize,
-					close,
+					awful.titlebar.widget.closebutton(c),
 				}
 			}
 		},
@@ -216,7 +216,7 @@ client.connect_signal("request::titlebars", function(c)
 					ontop,
 					minimize,
 					maximize,
-					close,
+					awful.titlebar.widget.closebutton(c),
 				}
 			}
 		}
@@ -237,7 +237,7 @@ client.connect_signal("request::titlebars", function(c)
 				{
 					layout = wibox.layout.fixed.horizontal,
 					spacing = dpi(6),
-					close,
+					awful.titlebar.widget.closebutton(c),
 					maximize,
 					minimize,
 					ontop,

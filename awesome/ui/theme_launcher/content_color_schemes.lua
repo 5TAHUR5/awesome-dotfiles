@@ -31,14 +31,14 @@ updateColorSchemes = function()
 end
 
 setColorScheme = function(scheme_name)
-    awful.spawn.easy_async_with_shell([[sed -i -e "s/\/other\/rofi\/themes\/.*.rasi/\/other\/rofi\/themes\/]].. scheme_name .. [[.rasi/g"  ~/.config/awesome/other/rofi/themes/last_theme.rasi]])
+    awful.spawn.easy_async_with_shell([[sed -i -e "s/\/themes\/rofi\/.*.rasi/\/themes\/rofi\/]].. scheme_name .. [[.rasi/g"  ~/.config/awesome/themes/rofi/last_theme.rasi]])
     binser.writeFile(paths.to_file_last_color_scheme, {
         last_scheme_name = scheme_name
     })  
     awesome.restart()
 end
 
-selectable_scheme_name = ""
+local selectable_scheme_name = ""
 
 -- templates ----
 local create_color_schemes_btn = function(text)

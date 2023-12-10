@@ -233,12 +233,14 @@ local theme_launcher_tool_boxes = {
 	["settings"] = create_tool_box("   "),
     ["walls"] = create_tool_box("  "),
     ["color_schemes"] = create_tool_box("󰏘 "),
+	["alacritty_themes"] = create_tool_box("   "),
 }
 
 for switch, box in pairs(theme_launcher_tool_boxes) do
 	box:buttons {awful.button({}, 1, function() awesome.emit_signal("summon::theme_changer", switch) end)}
 end
 
+theme_launcher_tool_list:insert(1, theme_launcher_tool_boxes["alacritty_themes"])
 theme_launcher_tool_list:insert(1, theme_launcher_tool_boxes["walls"])
 theme_launcher_tool_list:insert(1, theme_launcher_tool_boxes["color_schemes"])
 theme_launcher_tool_list:insert(1, theme_launcher_tool_boxes["settings"])
@@ -382,7 +384,7 @@ local netbtn = wibox.widget {
 		halign = "center",
 		{
 			widget = wibox.widget.textbox,
-			text = " 󰀂  ",
+			text = "󰖩 ",
 			halign = "center",
 			valign = "center",
 			font = beautiful.font .. " 35"

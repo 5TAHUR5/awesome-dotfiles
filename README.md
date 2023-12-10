@@ -1,12 +1,11 @@
 ![img](assets/awesome.png)
 <br>
 # I just get [`this`](https://github.com/Sinomor/dotfiles) dotfiles, and remade it
-## This dotfiles does not affect other programs (terminal, browser, telegram) and contains only the WM setting!!!
+## This dotfiles contains only terminal (alacritty) WM setting!!!
 <details>
 <summary><b>Screenshots</b></summary>
    
-![img](assets/screen1.png)
-![img](assets/screen2.png)
+![img](https://imgur.com/a/mF5QGql.png)
 
 </details>
 <details>
@@ -103,17 +102,19 @@ Comments:
 1. ##### Lite dependencies:
      - ##### In Void linux:
        ```bash
-       $ sudo xbps-install feh fontconfig NetworkManager rofi flameshot alsa-utils xclip xrdb picom polkit-gnome ImageMagick playerctl brightnessctl nerd-fonts-symbols-ttf
+       $ sudo xbps-install alacritty feh fontconfig NetworkManager rofi flameshot alsa-utils xclip xrdb picom polkit-gnome ImageMagick playerctl brightnessctl nerd-fonts-symbols-ttf
        $ fc-cache -f -v
        ```
      - ##### In Arch linux:
        ```bash
-       $ sudo pacman -S feh fontconfig networkmanager rofi flameshot alsa-utils xclip picom polkit-gnome imagemagick playerctl brightnessctl ttf-nerd-fonts-symbols
+       $ sudo pacman -S alacritty feh fontconfig networkmanager rofi flameshot alsa-utils xclip picom polkit-gnome imagemagick playerctl brightnessctl ttf-nerd-fonts-symbols
        $ fc-cache -f -v
        ```
      - ##### In Ubuntu:
        ```bash
        $ sudo apt-get install feh fontconfig network-manager rofi flameshot alsa-utils xclip picom policykit-1-gnome imagemagick playerctl brightnessctl 
+       $ sudo add-apt-repository ppa:mmstick76/alacritty
+       $ sudo apt install alacritty
        $ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/NerdFontsSymbolsOnly.zip
        $ unzip NerdFontsSymbolsOnly.zip
        $ cp ~/Downloads/NerdFontsSymbolsOnly/NerdFontsSymbolsOnly*.otf ~/.local/share/fonts/
@@ -133,6 +134,7 @@ Comments:
 $ git clone --depth=1 --recursive https://github.com/5TAHUR5/awesome-dotfiles.git
 $ cd awesome-dotfiles
 $ cp -R awesome ~/.config/
+$ cp -R alacritty ~/.config/
 $ cp .xinitrc ~/
 ```
 ##### And put your wallpapers in '~/.walls' for wallpaper launcher

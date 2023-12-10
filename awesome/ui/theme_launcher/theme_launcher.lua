@@ -6,6 +6,7 @@ local beautiful = require("beautiful")
 require("ui.theme_launcher.content_walls")
 require("ui.theme_launcher.content_color_schemes")
 require("ui.theme_launcher.content_settings")
+require("ui.theme_launcher.content_alacritty_themes")
 
 
 local current_switch = ""
@@ -15,6 +16,8 @@ local all_content = {
     ["settings"] = content_settings,
     ["walls"] = content_walls,
     ["color_schemes"] = content_color_schemes,
+    ["alacritty_themes"] = content_alacritty_themes,
+
 }
 
 local activate_switch = function(cur_switch)

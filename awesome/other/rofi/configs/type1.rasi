@@ -5,7 +5,7 @@ configuration {
 	modi: "drun";
 }
 
-@import "~/.config/awesome/other/rofi/themes/last_theme.rasi"
+@import "~/.config/awesome/themes/rofi/last_theme.rasi"
 
 * {
 	font: "RobotoMono Nerd Font 14";

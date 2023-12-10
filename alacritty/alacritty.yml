@@ -1,0 +1,101 @@
+import: 
+- ~/.config/awesome/themes/alacritty/everforest_soft.yml
+
+# colors:
+#   primary:
+#     background: '#232627'
+#     foreground: '#FCFCFC'
+#   normal:
+#     black: '#232627'
+#     red: '#ED1515'
+#     green: '#11D116'
+#     yellow: '#F67400'
+#     blue: '#1D99F3'
+#     magenta: '#9B59B6'
+#     cyan: '#1ABC9C'
+#     white: '#FCFCFC'
+
+#   bright:
+#     black: '#7F8C8D'
+#     red: '#C0392B'
+#     green: '#1CDC9A'
+#     yellow: '#FDBC4B'
+#     blue: '#3DAEE9'
+#     magenta: '#8E44AD'
+#     cyan: '#16A085'
+#     white: '#FFFFFF'
+
+env:
+  TERM: alacritty
+
+window:
+  padding:
+    x: 5
+    y: 5
+
+  dynamic_padding: true
+  opacity: 1
+
+  decorations: full
+
+  title: Alacritty
+
+  class:
+    instance: Alacritty
+    general: Alacritty
+
+scrolling:
+  history: 5000
+
+font:
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: Regular
+
+  bold:
+    family: JetBrainsMono Nerd Font
+    style: Bold
+
+  italic:
+    family: JetBrainsMono Nerd Font
+    style: Italic
+
+  bold_italic:
+    family: JetBrainsMono Nerd Font
+    style: Bold Italic
+
+  size: 8
+
+  offset:
+    x: 0
+    y: 0
+
+draw_bold_text_with_bright_colors: true
+
+cursor:
+  style: beam
+  unfocused_hollow: false
+
+shell:
+  program: /bin/fish
+
+key_bindings:
+- {key: V, mods: Control|Shift, action: Paste}
+- {key: C, mods: Control|Shift, action: Copy}
+- {key: Insert, mods: Shift, action: PasteSelection}
+- {key: Key0, mods: Control, action: ResetFontSize}
+- {key: Equals, mods: Control, action: IncreaseFontSize}
+- {key: Plus, mods: Control, action: IncreaseFontSize}
+- {key: Minus, mods: Control, action: DecreaseFontSize}
+- {key: F11, mods: None, action: ToggleFullscreen}
+- {key: Paste, mods: None, action: Paste}
+- {key: Copy, mods: None, action: Copy}
+- {key: L, mods: Control, action: ClearLogNotice}
+- {key: L, mods: Control, chars: "\f"}
+- {key: PageUp, mods: None, action: ScrollPageUp, mode: ~Alt}
+- {key: PageDown, mods: None, action: ScrollPageDown, mode: ~Alt}
+- {key: Home, mods: Shift, action: ScrollToTop, mode: ~Alt}
+- {key: End, mods: Shift, action: ScrollToBottom, mode: ~Alt}
+
+
+

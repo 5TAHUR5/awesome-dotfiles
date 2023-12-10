@@ -115,15 +115,17 @@ local function open()
 			awful.spawn(elements[index_element].command)
 		end,
 		keypressed_callback = function(_, key)
-			if key == "Right" or key == "l" then
+			if key == "Right" or key == "l" or key == "д" then
 				next()
 				add_elements()
-			elseif key == "Left" or key == "h" then
+			elseif key == "Left" or key == "h" or key == "р" then
 				back()
 				add_elements()
-			elseif key == "x" then
-				awful.spawn(elements[index_element].command)
-				powermenu.visible = false
+			-- elseif key == "x" or key == "ч" then
+			-- 	powermenu.visible = false
+
+			-- 	awful.spawn(elements[index_element].command)
+			-- 	--awful.client.focus.byidx(1)
 			end
 		end,
 		done_callback = function()

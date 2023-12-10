@@ -31,12 +31,17 @@ paths.to_script_picom_launch = paths.to_dir_picom .. "launch.sh"
 -- color schemes for awesome
 paths.to_dir_color_schemes = paths.to_dir_awesome .. "/themes/color_schemes/"
 paths.to_dir_theme_layouts_icons = paths.to_dir_awesome .. "/themes/icons/layouts/min/"
+paths.to_dir_theme_titlebar_icons = paths.to_dir_awesome .. "/themes/icons/titlebar/"
+paths.to_dir_alacritty_chemes = paths.to_dir_awesome .. "/themes/alacritty/"
+
 
 -- last changes
 paths.to_dir_last_changes = paths.to_dir_awesome .. "/themes/last_changes/"
 paths.to_file_last_wall = paths.to_dir_last_changes .. "last_wall"
 paths.to_file_last_color_scheme = paths.to_dir_last_changes .. "last_color_scheme"
 paths.to_file_last_settings = paths.to_dir_last_changes .. "last_settings"
+paths.to_file_last_alacritty_theme = paths.to_dir_last_changes .. "last_alacritty_theme"
+
 
 -- control
 paths.to_script_crutch_fetch = paths.to_dir_awesome .. "/other/bin/crutch_fetch"
