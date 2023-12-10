@@ -4,8 +4,10 @@
 ## This dotfiles contains only terminal (alacritty) and WM setting!!!
 <details>
 <summary><b>Screenshots</b></summary>
-   
+
+***
 ![counter](https://i.imgur.com/FXBc0Uu.png)
+***
 
 </details>
 <details>
@@ -91,12 +93,14 @@ Comments:
 
 ### Lockscreen
 ![lockscreen](assets/lockscreen.png)
-      
+***      
+
 </details>
 
 <details>
 <summary><b>Install</b></summary>
-   
+
+***
 #### Require a [awesome-git](https://github.com/awesomeWM/awesome) version
 #### Install dependencies
 1. ##### Lite dependencies:
@@ -146,11 +150,13 @@ $ mkdir .walls
 $ cp -r walls/* .walls/
 $ rm -r walls
 ```
+***
 
 </details>
 <details>
 <summary><b>Keybinding</b></summary>
 
+***
 | Keybinding            | Description                              |
 | --------------------- | ---------------------------------------- |
 | `Mod+Shift+r`         | Restart awesomewm                        |
@@ -177,27 +183,33 @@ $ rm -r walls
 | `Mod+Ctrl+`  `k/j/h/l`/`Up/Down/Left/Right`      | Resize focused client         |
 | `Mod+Shift+`  `k/j/h/l`/`Up/Down/Left/Right`     | Move or swap by direction     |
 | `Mod+Shift+Ctrl+`  `k/j/h/l`/`Up/Down/Left/Right`| Relative move  floating client|
+***
 
 </details>
 <details>
 <summary><b>Mousebinding</b></summary>
    
+***
 | Mousebinding           | Description        |
 | ---------------------- | -------------------|
 | `Mod+Left button`      | Move client        |
 | `Mod+Right button`     | Resize client      |
+***
 
 </details>
 
 <details>
 <summary><b>TODO</b></summary>
    
+***
 - Correct dpi
 - Make the code more optimal
 - ~~Replace the liblua_pam with a more convenient solution~~
+***
    
 </details>
 
+***
 ## If you have any problems, write to me in [telegram](https://t.me/ban_ocka). (in other social networks i rarely appear) !!!
 ***
 ### See also
