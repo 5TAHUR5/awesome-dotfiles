@@ -12,7 +12,7 @@ local results, len = binser.readFile(paths.to_file_last_alacritty_theme)
 local last_alacritty_theme = results[1].last_alacritty_theme
 
 -- binser.writeFile(paths.to_file_last_alacritty_theme, {
---     last_theme_name = 'nord'
+--     last_alacritty_theme = 'nord'
 -- })
 
 -- scripts --
@@ -32,7 +32,7 @@ local last_alacritty_theme = results[1].last_alacritty_theme
 
 setAlacrittyTheme = function(theme_name)
     binser.writeFile(paths.to_file_last_alacritty_theme, {
-        last_theme_name = theme_name,
+        last_alacritty_theme = theme_name,
     })  
     if theme_name == "theme_how_system" then
         local results, len = binser.readFile(paths.to_file_last_color_scheme)
@@ -40,7 +40,7 @@ setAlacrittyTheme = function(theme_name)
     end
     awful.spawn.easy_async_with_shell([[sed -i -e "s/\/themes\/alacritty\/.*.yml/\/themes\/alacritty\/]].. theme_name .. [[.yml/g"  ~/.config/alacritty/alacritty.yml]])
 end
-
+setAlacrittyTheme(last_alacritty_theme)
 local selectable_theme_name = ""
 
 -- templates ----
