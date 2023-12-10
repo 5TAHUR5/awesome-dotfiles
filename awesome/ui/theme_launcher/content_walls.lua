@@ -35,6 +35,7 @@ updateLuts = function()
 end
 
 updateLiteWalls = function()
+    awful.spawn.with_shell("mkdir " .. paths.to_dir_lite_walls)
     awful.spawn.easy_async({"sh", "-c", "rm -rf " .. paths.to_dir_lite_walls .. "* && magick mogrify -resize 160x100 -path " .. paths.to_dir_lite_walls .. " " .. paths.to_dir_walls .. "*"}, function()
         updateWalls()
     end)
