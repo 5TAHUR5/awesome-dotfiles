@@ -5,7 +5,7 @@
 <details>
 <summary><b>Screenshots</b></summary>
    
-![counter](https://imgur.com/FXBc0Uu)
+![counter](https://i.imgur.com/FXBc0Uu.png)
 
 </details>
 <details>
