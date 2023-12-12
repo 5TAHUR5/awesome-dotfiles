@@ -2,6 +2,7 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local helpers = require("helpers")
 local naughty = require("naughty")
 local dpi = require('beautiful').xresources.apply_dpi
 require("scripts.init")
@@ -387,6 +388,14 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 context = "tasklist",
                 action = "close client"
             }
+        end), awful.button({}, 4, function(c)
+            awful.client.focus.byidx(1)
+        end), awful.button({}, 5, function(c)
+            awful.client.focus.byidx(-1)
+        end), awful.button({ "Mod4" }, 4, function(c)
+            awful.client.swap.byidx(-1)
+        end), awful.button({ "Mod4" }, 5, function(c)
+            awful.client.swap.byidx(1)
         end)},
         layout = {
             spacing = dpi(5),
@@ -517,7 +526,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
         },
         ontop = false,
         widget = {
-            layout = wibox.layout.flex.horizontal,
+            layout = wibox.layout.align.horizontal,
+            expand = "outside",
             {
                 widget = wibox.container.place,
                 halign = "left",
