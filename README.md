@@ -140,6 +140,7 @@ $ git clone --depth=1 --recursive https://github.com/5TAHUR5/awesome-dotfiles.gi
 $ cd awesome-dotfiles
 $ cp -R awesome ~/.config/
 $ cp -R alacritty ~/.config/
+$ cp -R fontconfig ~/.config/
 $ cp .xinitrc ~/
 ```
 ##### And put your wallpapers in '~/.walls' for wallpaper launcher
@@ -150,6 +151,12 @@ $ git clone --depth=1 https://github.com/Sinomor/walls.git
 $ mkdir .walls
 $ cp -r walls/* .walls/
 $ rm -r walls
+```
+Or [my](https://github.com/5TAHUR5/my_walls)
+```bash
+$ git clone --depth=1 https://github.com/5TAHUR5/my_walls.git
+$ cp -r my_walls/.walls ~/
+$ rm -r my_walls
 ```
 ***
 
