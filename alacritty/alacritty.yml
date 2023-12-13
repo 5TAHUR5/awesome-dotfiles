@@ -76,8 +76,6 @@ cursor:
   style: beam
   unfocused_hollow: false
 
-shell:
-  program: /bin/fish
 
 key_bindings:
 - {key: V, mods: Control|Shift, action: Paste}
