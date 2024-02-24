@@ -140,6 +140,7 @@ $ git clone --depth=1 --recursive https://github.com/5TAHUR5/awesome-dotfiles.gi
 $ cd awesome-dotfiles
 $ cp -R awesome ~/.config/
 $ cp -R alacritty ~/.config/
+$ cp -R nvim ~/.config/
 $ cp -R fontconfig ~/.config/
 $ cp .xinitrc ~/
 ```
