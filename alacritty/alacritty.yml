@@ -1,5 +1,5 @@
 import: 
-- ~/.config/awesome/themes/alacritty/everforest_soft.yml
+- ~/.config/awesome/themes/alacritty/alien_blood.yml
 
 # colors:
 #   primary:
@@ -30,8 +30,8 @@ env:
 
 window:
   padding:
-    x: 5
-    y: 5
+    x: 0
+    y: 0
 
   dynamic_padding: true
   opacity: 1
@@ -49,19 +49,19 @@ scrolling:
 
 font:
   normal:
-    family: JetBrainsMono Nerd Font
+    family: BlexMono Nerd Font
     style: Regular
 
   bold:
-    family: JetBrainsMono Nerd Font
+    family: BlexMono Nerd Font
     style: Bold
 
   italic:
-    family: JetBrainsMono Nerd Font
+    family: BlexMono Nerd Font
     style: Italic
 
   bold_italic:
-    family: JetBrainsMono Nerd Font
+    family: BlexMono Nerd Font
     style: Bold Italic
 
   size: 8
@@ -75,7 +75,6 @@ draw_bold_text_with_bright_colors: true
 cursor:
   style: beam
   unfocused_hollow: false
-
 
 key_bindings:
 - {key: V, mods: Control|Shift, action: Paste}

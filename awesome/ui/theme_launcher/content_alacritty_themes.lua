@@ -38,7 +38,7 @@ setAlacrittyTheme = function(theme_name)
         local results, len = binser.readFile(paths.to_file_last_color_scheme)
         theme_name = results[1].last_scheme_name
     end
-    awful.spawn.easy_async_with_shell([[sed -i -e "s/\/themes\/alacritty\/.*.yml/\/themes\/alacritty\/]].. theme_name .. [[.yml/g"  ~/.config/alacritty/alacritty.yml]])
+    awful.spawn.easy_async_with_shell([[sed -i -e "s/\/themes\/alacritty\/.*.toml/\/themes\/alacritty\/]].. theme_name .. [[.toml/g"  ~/.config/alacritty/alacritty.toml]])
 end
 setAlacrittyTheme(last_alacritty_theme)
 local selectable_theme_name = ""

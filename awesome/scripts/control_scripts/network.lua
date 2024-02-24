@@ -8,7 +8,7 @@ last_tx = 0
 
 
 local updateNetspeed = function(say_netspeed)
-    awful.spawn.easy_async({"sh", "-c", [[nmcli device | grep -w 'connected' | awk '{$3=""; print $0}' | awk '{print $1 "|" $2 "|" substr($0, index($0,$3))}']]}, function(devices)
+    awful.spawn.easy_async({"sh", "-c", [[nmcli device | grep -w 'connected' | awk '{$3=""; print $0}' | awk '{print $1 "|" $2 "|" substr($0, index($0,$3))}' | awk '$2!="lo"{print $0}']]}, function(devices)
         device_string = ' | grep '
         connections = {}
         for device in devices:gmatch("[^\n]+") do 

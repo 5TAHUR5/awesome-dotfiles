@@ -18,6 +18,7 @@ awful.keyboard.append_global_keybindings({
 
 	awful.key({ mod }, "Return", function() awful.spawn(terminal) end),
 	awful.key({}, "Print", function() awful.spawn("flameshot gui") end),
+	awful.key({ mod }, "t", function() awful.spawn("ayugram-desktop") end),
 	--awful.key({}, "Print", function() awful.spawn.easy_async_with_shell("sleep 3 && flameshot gui") end),
 
 

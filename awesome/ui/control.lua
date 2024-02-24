@@ -105,7 +105,7 @@ local resourses = wibox.widget {
 	layout = wibox.layout.fixed.horizontal,
 	spacing = 10,
 	create_arcchart_widget(cpu, "cpu_forctr::update", beautiful.background_urgent, beautiful.red, "CPU:", "    ", "%"),
-	create_arcchart_widget(ram, "ram_forctr::update", beautiful.background_urgent, beautiful.green, "RAM:", "", "%"),
+	create_arcchart_widget(ram, "ram_forctr::update", beautiful.background_urgent, beautiful.green, "RAM:", "", "%"),
 	create_arcchart_widget(disk, "disk_forctr::update", beautiful.background_urgent, beautiful.blue, "DISK:", " ", "%"),
 	create_arcchart_widget(cputemp, "cputemp::update", beautiful.background_urgent, beautiful.orange, "TEMP:", "", "t°"),
 }
@@ -359,7 +359,7 @@ awesome.connect_signal("connections::update", function(connections_list)
 			elseif connections_list[i].connection_type == "wifi" then
 				icon = "󰖩  |"
 			else
-				icon = "  |"
+				icon = "󰀂  |"
 			end
 			connections.widget.children[i].children[1].text = icon
 			connections.widget.children[i].children[2].text = connections_list[i].connection_name .. " |"

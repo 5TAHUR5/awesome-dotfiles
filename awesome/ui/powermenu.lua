@@ -6,8 +6,8 @@ require("ui.lock")
 local elements = {
 	{"suspend", command = "awesome-client 'lockscreen()'", icon = ""},
 	{"exit", command = "awesome-client 'awesome.quit()'", icon = "󰗼 "},
-	{"reboot", command = "loginctl reboot", icon = " "},
-	{"poweroff", command = "loginctl poweroff", icon = "󰤆 "},
+	{"reboot", command = "reboot", icon = " "},
+	{"poweroff", command = "shutdown now", icon = "󰤆 "},
 }
 
 local elements_container = wibox.widget {

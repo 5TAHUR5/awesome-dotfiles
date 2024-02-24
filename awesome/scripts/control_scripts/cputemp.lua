@@ -5,7 +5,7 @@ local update_interval = 4
 
 -- This is the wrong way to find out the CPU temperature, 
 -- I just don't have a GPU temperature indicator, 
--- so the correct calculation would be too difficult for me
+-- so the correct calculation would be too difficult for me  ¯⁠\⁠_⁠(⁠ツ⁠)⁠_⁠/⁠¯
 local updateCputemp = function()
     awful.spawn.easy_async({"sh", "-c", "cat /sys/class/thermal/thermal_zone0/temp"}, function(stdout)
         awesome.emit_signal("cputemp::update", (math.ceil(tonumber(stdout) / 1000)))

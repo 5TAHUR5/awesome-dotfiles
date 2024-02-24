@@ -32,7 +32,7 @@ client.connect_signal("request::titlebars", function(c)
 			valign = "top",
 			{
 				widget = wibox.container.margin,
-				margins = {right = dpi(4), left = dpi(4), top = dpi(8)},
+				margins = {right = dpi(4), left = dpi(4), top = dpi(6)},
 				{
 					layout = wibox.layout.fixed.vertical,
 					spacing = dpi(6),
@@ -75,7 +75,7 @@ client.connect_signal("request::titlebars", function(c)
 			valign = "bottom",
 			{
 				widget = wibox.container.margin,
-				margins = {right = dpi(4), left = dpi(4), bottom = dpi(8)},
+				margins = {right = dpi(4), left = dpi(4), bottom = dpi(6)},
 				{
 					layout = wibox.layout.fixed.vertical,
 					spacing = dpi(6),
@@ -111,7 +111,7 @@ client.connect_signal("request::titlebars", function(c)
 			valign = "right",
 			{
 				widget = wibox.container.margin,
-				margins = {top = dpi(4), bottom = dpi(4), right = dpi(8)},
+				margins = {top = dpi(4), bottom = dpi(4), right = dpi(6)},
 				{
 					layout = wibox.layout.fixed.horizontal,
 					spacing = dpi(6),
@@ -137,7 +137,7 @@ client.connect_signal("request::titlebars", function(c)
 			valign = "right",
 			{
 				widget = wibox.container.margin,
-				margins = {top = dpi(4), bottom = dpi(4), left = dpi(8)},
+				margins = {top = dpi(4), bottom = dpi(4), left = dpi(6)},
 				{
 					layout = wibox.layout.fixed.horizontal,
 					spacing = dpi(6),

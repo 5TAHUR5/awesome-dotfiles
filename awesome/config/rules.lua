@@ -22,6 +22,14 @@ ruled.client.append_rule {
 	}
 }
 
+ruled.client.append_rule {
+	rule_any = { class = { "Engrampa" } },
+	properties = { floating = true},
+	callback = function(c)
+		awful.placement.centered(c, nil)
+	end
+}
+
 end)
 
 client.connect_signal("mouse::enter", function(c)

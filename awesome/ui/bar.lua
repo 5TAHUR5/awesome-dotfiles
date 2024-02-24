@@ -60,7 +60,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             }
         },
         {
-            widget = create_widget_icontext(" ")
+            widget = create_widget_icontext("󱑎 ")
         }
     }
 
