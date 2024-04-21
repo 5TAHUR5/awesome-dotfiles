@@ -37,7 +37,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         layout = wibox.layout.fixed.horizontal,
         fill_space = true,
         {
-            widget = create_widget_icontext("󰸗 ")
+            widget = create_widget_icontext(beautiful.icon_calendar)
         },
         {
             widget = wibox.container.background,
@@ -60,7 +60,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             }
         },
         {
-            widget = create_widget_icontext("󱑎 ")
+            widget = create_widget_icontext(beautiful.icon_clock)
         }
     }
 
@@ -145,7 +145,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
     local keyboard = wibox.widget {
         layout = wibox.layout.fixed.horizontal,
         {
-            widget = create_widget_icontext("󰌌 ")
+            widget = create_widget_icontext(beautiful.icon_keyboard)
         },
         {
             widget = wibox.container.background,
@@ -248,8 +248,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 widget = microphone_icon,
                 halign = "center",
                 valign = "center",
-                forced_width = dpi(15),
-                font = beautiful.font .. " 13"
+                font = beautiful.font .. " 16"
             }
         },
         {
@@ -456,9 +455,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     widget = wibox.widget.systray,
                     horizontal = true,
                     base_size = dpi(23)
-                }   
+                }
             }
-         
         }
 
     }
@@ -484,23 +482,22 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 {
                     widget = wibox.widget.textbox,
                     id = "button",
-                    text = "",
+                    text = beautiful.icon_left_arrow,
                     font = beautiful.font .. " 21",
                     halign = "center",
                     valign = "center",
                 }
             },
-            
         }
     }
     local tray_visible = false
 
     awesome.connect_signal("summon::systray", function()
         if not tray_visible then
-            tray:get_children_by_id("button")[1].text = ""
+            tray:get_children_by_id("button")[1].text = beautiful.icon_right_arrow
             tray:get_children_by_id("tray")[1]:insert(1, tray_widget)
         else
-            tray:get_children_by_id("button")[1].text = ""
+            tray:get_children_by_id("button")[1].text = beautiful.icon_left_arrow
             tray:get_children_by_id("tray")[1]:remove(1)
         end
         tray_visible = not tray_visible

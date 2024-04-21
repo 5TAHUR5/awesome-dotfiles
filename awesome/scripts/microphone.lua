@@ -12,9 +12,9 @@ function update_microphone()
 		value = tonumber(value)
 		local icon = ""
 		if toggle == "off" then
-			icon = " "
+			icon = "󰍭 "
 		else
-			icon = "  "
+			icon = " 󰍬 "
 		end
 		awesome.emit_signal("capture::get_capture", value, icon, toggle)
 	end)

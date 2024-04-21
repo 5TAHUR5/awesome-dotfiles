@@ -26,6 +26,12 @@ theme.notification_icon_error = "~/.config/awesome/themes/icons/alert.svg"
 theme.notification_icon_scrensht = "~/.config/awesome/themes/icons/camera.svg"
 theme.no_song = "~/.config/awesome/themes/icons/no_song.png"
 
+theme.icon_calendar = " "
+theme.icon_clock = "󰥔 "
+theme.icon_right_arrow = "󰄾"
+theme.icon_left_arrow = "󰄽"
+theme.icon_keyboard = "󰌌 "
+
 -- colors -------------------------------------
 
 theme.background = color_scheme.background
