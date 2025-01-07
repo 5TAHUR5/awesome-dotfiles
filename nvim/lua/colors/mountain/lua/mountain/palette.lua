@@ -2,7 +2,7 @@ local palette = {
 	bg = '#191919',
 	bg_alt = '#292929',
 	bg_urgent = '#393939',
-    bg_accnt = '#4c4c4c',
+    bg_accent = '#4c4c4c',
 	fg_alt  = "#5c5b5b",
 	fg = '#f0f0f0',
 

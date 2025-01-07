@@ -1,0 +1,108 @@
+configuration {
+	modi:                       "drun";
+    show-icons:                 true;
+    display-drun:               ">";
+	drun-display-format:        "{name}";
+}
+
+@import "~/.config/awesome/themes/rofi/last_theme.rasi"
+
+* {
+	font: "RobotoMono Nerd Font 10";
+	separatorcolor: transparent;
+    background-color : transparent;
+    text-color       : @foreground;
+
+    margin  : 0;
+    padding : 0;
+    spacing : 0;
+}
+
+element-icon, element-text, scrollbar {
+  cursor: pointer;
+}
+
+window {
+    location:                    south;
+    width:                       650px;
+    height:                      650px;
+    y-offset:                    -4px;
+
+    background-color : @background;
+    border-color     : transparent;
+    border-radius    : 8px;
+}
+
+mainbox {
+  padding : 17px;
+  spacing : 24px;
+}
+
+inputbar {
+  padding          : 8px;
+  spacing          : 4px;
+  children         : [ icon-search, entry ];
+  border           : 0 0 2px 0 solid;
+  border-color     : @accent;
+  border-radius    : 2px;
+  background-color : @background-alt;
+}
+
+icon-search, entry, element-icon, element-text {
+  vertical-align: 0.5;
+}
+
+icon-search {
+  expand   : false;
+  filename : "search-symbolic";
+  size     : 24px;
+}
+
+entry {
+  font              : "Roboto 10";
+  placeholder       : "Type here to search";
+  placeholder-color : @foreground;
+}
+
+textbox {
+  padding          : 4px 8px;
+  background-color : @background-alt;
+}
+
+listview {
+  columns       : 6;
+  spacing       : 8px;
+  fixed-height  : true;
+  fixed-columns : true;
+}
+
+element {
+    orientation   : vertical;
+    spacing       : 4px;
+    padding       : 8px;
+    border-radius : 2px;
+}
+
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+
+element.alternate.normal {
+    background-color: transparent;
+    text-color:       @foreground;
+}
+
+element selected.normal {
+    background-color:            @border;
+    text-color:                  @foreground;
+}
+
+element-icon {
+    size: 2.4em;
+}
+
+element-text {
+    text-color       : inherit;
+    horizontal-align : 0.5;
+}

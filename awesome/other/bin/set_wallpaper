@@ -11,3 +11,7 @@ else
 fi
 
 feh --no-fehbg --bg-fill $out
+
+wal -c 
+wal -s -i ~/.config/awesome/themes/wall.jpg
+

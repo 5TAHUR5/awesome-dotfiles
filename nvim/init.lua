@@ -6,18 +6,21 @@ require("core.configs")
 
 -- Plugins config
 require("plugins.telescope")
-require("plugins.lsp")
-require("plugins.cmp")
 require("plugins.lualine")
-require("plugins.treesitter")
 require("plugins.toggleterm")
 require("plugins.outline")
 require("plugins.autopairs")
-require("plugins.comments")
 require("plugins.autotag")
 require("plugins.whichkey")
 require("plugins.nvimtree")
-require("plugins.mason")
 require("plugins.cokeline")
--- require("plugins.themes")
 require('plugins.mini_starter')
+require('plugins.treesitter') -- Подсветка синтаксиса
+require('plugins.lsp')        -- Language server protocol
+require('plugins.cmp')        -- Автокомплит
+require('plugins.mason')      -- Mason
+require('plugins.conform')
+require('plugins.snippets')
+require('plugins.todo_comments')
+require('plugins.splits')
+require('plugins.resession')

@@ -1,43 +1,4 @@
---
---
--- require("nvim-tree").setup({
--- 	view = {relativenumber = true},
--- 	renderer = {
--- 		icons = {
--- 			web_devicons = {
--- 				file = {
--- 					enable = true,
--- 					color = true,
--- 				}
--- 			},
--- 			glyphs = {
--- 				default = "",
--- 				symlink = "",
--- 				bookmark = "",
--- 				modified = "",
--- 				folder = {
--- 					arrow_closed = "▷",
--- 					arrow_open = "▽",
--- 					default = "",
--- 					open = "",
--- 					empty = "󰜌",
--- 					empty_open = "󰜌",
--- 					symlink = "",
--- 					symlink_open = "",
--- 				},
--- 				git = {
--- 					unstaged = "~",
--- 					staged = "+",
--- 					unmerged = "%",
--- 					renamed = "@",
--- 					untracked = "*",
--- 					deleted = "-",
--- 					ignored = "#",
--- 				}
--- 			}
--- 		}
--- 	}
--- })
+
 local function my_on_attach(bufnr)
     local api = require "nvim-tree.api"
 
@@ -306,4 +267,4 @@ require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
           watcher = false,
         },
       },
-    } -- END_DEFAULT_OPTS
+    }

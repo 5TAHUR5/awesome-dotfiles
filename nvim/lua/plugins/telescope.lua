@@ -1,8 +1,22 @@
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fw', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find files" })
+vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = "Find words" })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find buffers" })
+vim.keymap.set('n', '<Leader>f<CR>', builtin.resume, { desc = "Resume previous search" })
+vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Find history" })
+vim.keymap.set('n', '<Leader>f\'', builtin.marks, { desc = "Find marks" })
+vim.keymap.set('n', '<leader>f/', builtin.current_buffer_fuzzy_find, { desc = "Find words in current buffer" })
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = "Find keymaps" })
+vim.keymap.set('n', '<leader>ft', builtin.colorscheme, { desc = "Find themes" })
+vim.keymap.set('n', '<leader>fC', builtin.commands, { desc = "Find commands" })
+vim.keymap.set('n', '<leader>fc', builtin.grep_string, { desc = "Find word under cursor" })
+vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = "Search symbols" })
+vim.keymap.set('n', '<leader>lD', builtin.diagnostics, { desc = "Search diagnostics" })
 
+
+-- local actions = require("telescope.actions")
+-- vim.keymap.set('i', "<C-J>", actions.move_selection_next)
+-- vim.keymap.set('i', "<C-K>", actions.move_selection_previous)
 
 require('telescope').setup {
     pickers = {
@@ -26,36 +40,3 @@ require('telescope').setup {
       },
     }
 }
-
--- vim.keymap.set('n', '<Tab>', builtin.buffers, {})
--- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
--- vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, {})
--- vim.keymap.set('n', 'gr', builtin.lsp_references,
---                {noremap = true, silent = true})
--- vim.keymap.set('n', 'gd', builtin.lsp_definitions,
---                {noremap = true, silent = true})
-
-
-
-
-
--- local telescope_status, telescope = pcall(require, 'telescope')
--- if not telescope_status then
---   print('Failed to require telescope')
---   return
--- end
---
--- local telescope_actions_status, telescope_actions = pcall(require, "telescope.actions")
--- if not telescope_actions_status then
---   print('Failed to require telescode.actions')
---   return
--- end
---
--- telescope.setup {}
--- telescope.load_extension("fzf")
---
--- local builtin = require('telescope.builtin')
--- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
--- vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
--- vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
--- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
