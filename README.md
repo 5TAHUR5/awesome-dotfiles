@@ -138,27 +138,10 @@ Comments:
 ```bash
 $ git clone --depth=1 --recursive https://github.com/5TAHUR5/awesome-dotfiles.git
 $ cd awesome-dotfiles
-$ cp -R awesome ~/.config/
-$ cp -R alacritty ~/.config/
-$ cp -R nvim ~/.config/
-$ cp -R fontconfig ~/.config/
-$ cp .xinitrc ~/
+$ sh install.sh
 ```
 ##### And put your wallpapers in '~/.walls' for wallpaper launcher
 
-I recommend this wallpaper [repository](https://github.com/Sinomor/walls):
-```bash
-$ git clone --depth=1 https://github.com/Sinomor/walls.git
-$ mkdir .walls
-$ cp -r walls/* .walls/
-$ rm -r walls
-```
-Or [my](https://github.com/5TAHUR5/my_walls)
-```bash
-$ git clone --depth=1 https://github.com/5TAHUR5/my_walls.git
-$ cp -r my_walls/.walls ~/
-$ rm -r my_walls
-```
 ***
 
 </details>
