@@ -202,7 +202,7 @@ $ sh install.sh
 </details>
 
 ***
-## If you have any problems, write to me in [telegram](https://t.me/ban_ocka). (in other social networks i rarely appear) !!!
+## If you have any problems, write to me in [telegram](https://t.me/chugun_nya). (in other social networks i rarely appear) !!!
 ### See also
 - Sinomor [dotfiles](https://github.com/Sinomor/dotfiles)
 - Myagko [dotfiles](https://github.com/Myagko/dotfiles)
