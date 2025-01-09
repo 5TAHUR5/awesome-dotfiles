@@ -30,6 +30,14 @@ awful.keyboard.append_global_keybindings({
 		awesome.emit_signal("capture::set_capture", "toggle")
 	end),
 
+	awful.key({}, "Num_Lock", function()
+		awesome.emit_signal("numlock::toggle")
+	end),
+
+	awful.key({}, "Caps_Lock", function()
+		awesome.emit_signal("capslock::toggle")
+	end),
+
 	-- rofi --
 
 	awful.key({ mod }, "d", function()
