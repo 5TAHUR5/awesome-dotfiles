@@ -107,17 +107,17 @@ Comments:
 1. ##### Lite dependencies:
      - ##### In Void linux:
        ```bash
-       $ sudo xbps-install alacritty feh fontconfig NetworkManager rofi flameshot alsa-utils xclip xrdb picom polkit-gnome ImageMagick playerctl brightnessctl nerd-fonts-symbols-ttf neovim
+       $ sudo xbps-install alacritty feh fontconfig NetworkManager rofi flameshot alsa-utils xclip xrdb picom polkit-gnome ImageMagick playerctl brightnessctl nerd-fonts-symbols-ttf neovim xdotool
        $ fc-cache -f -v
        ```
      - ##### In Arch linux:
        ```bash
-       $ sudo pacman -S alacritty feh fontconfig networkmanager rofi flameshot alsa-utils xclip picom polkit-gnome imagemagick playerctl brightnessctl ttf-nerd-fonts-symbols neovim
+       $ sudo pacman -S alacritty feh fontconfig networkmanager rofi flameshot alsa-utils xclip picom polkit-gnome imagemagick playerctl brightnessctl ttf-nerd-fonts-symbols neovim xdotool
        $ fc-cache -f -v
        ```
      - ##### In Ubuntu:
        ```bash
-       $ sudo apt-get install feh fontconfig network-manager rofi flameshot alsa-utils xclip picom policykit-1-gnome imagemagick playerctl brightnessctl neovim
+       $ sudo apt-get install feh fontconfig network-manager rofi flameshot alsa-utils xclip picom policykit-1-gnome imagemagick playerctl brightnessctl neovim xdotool
        $ sudo add-apt-repository ppa:mmstick76/alacritty
        $ sudo apt install alacritty
        $ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/NerdFontsSymbolsOnly.zip
