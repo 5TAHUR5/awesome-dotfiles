@@ -15,9 +15,13 @@ local info = wibox.widget {
 		fill_space = true,
 		spacing = dpi(8),
 		{
-			widget = wibox.widget.textbox,
-			id = "icon",
-			font = beautiful.font .. " 14",
+			widget = wibox.widget.imagebox,
+			forced_height = dpi(25),
+			forced_height = dpi(25),
+			halign = "center",
+			valign = "center",
+			id = "icon",				
+
 		},
 		{
 			widget = wibox.container.background,
@@ -65,10 +69,16 @@ local anim = rubato.timed {
 
 -- volume --
 
-awesome.connect_signal("volume::get_volume", function(value, icon)
+awesome.connect_signal("volume::get_volume", function(value, muted)
+	if muted == "off" then
+		info:get_children_by_id("icon")[1].image = gears.color.recolor_image(beautiful.icon_float_speaker_mute, beautiful.accent)
+	elseif value > 49 then
+		info:get_children_by_id("icon")[1].image = gears.color.recolor_image(beautiful.icon_float_speaker_full, beautiful.accent)
+	else
+		info:get_children_by_id("icon")[1].image = gears.color.recolor_image(beautiful.icon_float_speaker_low, beautiful.accent)
+	end
 	anim.target = value
 	info:get_children_by_id("text")[1].text = value
-	info:get_children_by_id("icon")[1].text = icon
 end)
 
 -- bright --
@@ -76,7 +86,7 @@ end)
 awesome.connect_signal("bright::get_bright", function(value)
 	anim.target = value
 	info:get_children_by_id("text")[1].text = value
-	info:get_children_by_id("icon")[1].text = ""
+	info:get_children_by_id("icon")[1].image = gears.color.recolor_image(beautiful.icon_float_bright, beautiful.accent)
 end)
 
 -- function --

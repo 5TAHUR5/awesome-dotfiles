@@ -1,5 +1,6 @@
 local awful = require("awful")
 local gears = require("gears")
+local beautiful = require("beautiful")
 
 -- Microphone ------------------------------------------
 
@@ -9,13 +10,7 @@ function update_microphone()
 		local value = string.match(stdout, "(%d?%d?%d)%%")
 		local toggle = string.match(stdout, "%[(o%D%D?)%]")
 		value = tonumber(value)
-		local icon = ""
-		if toggle == "off" then
-			icon = "󰍭 "
-		else
-			icon = " 󰍬 "
-		end
-		awesome.emit_signal("capture::get_capture", value, icon, toggle)
+		awesome.emit_signal("capture::get_capture", value, toggle)
 	end)
 end
 

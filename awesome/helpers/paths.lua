@@ -31,6 +31,9 @@ paths.to_script_picom_launch = paths.to_dir_picom .. "launch.sh"
 -- color schemes for awesome
 paths.to_dir_color_schemes = paths.to_dir_awesome .. "/themes/color_schemes/"
 paths.to_dir_theme_layouts_icons = paths.to_dir_awesome .. "/themes/icons/layouts/min/"
+paths.to_dir_theme_bar_icons = paths.to_dir_awesome .. "/themes/icons/bar/"
+paths.to_dir_theme_float_icons = paths.to_dir_awesome .. "/themes/icons/float/"
+paths.to_dir_theme_control_icons = paths.to_dir_awesome .. "/themes/icons/control/"
 paths.to_dir_theme_titlebar_icons = paths.to_dir_awesome .. "/themes/icons/titlebar/"
 paths.to_dir_alacritty_chemes = paths.to_dir_awesome .. "/themes/alacritty/"
 

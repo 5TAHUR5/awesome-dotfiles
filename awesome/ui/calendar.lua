@@ -31,9 +31,16 @@ local button_back = wibox.widget({
 	widget = wibox.container.background,
 	bg = beautiful.background,
 	{
-		widget = wibox.widget.textbox,
-		text = "🢀",
-		font = beautiful.font .. " 20",
+		widget = wibox.container.margin,
+		forced_height = dpi(28),
+		forced_width = dpi(28),
+		{
+			widget = wibox.widget.imagebox,
+			image = gears.color.recolor_image(beautiful.icon_float_left, beautiful.foreground),
+			valign = "center",
+			halign = "center",
+			resize = true
+		}
 	},
 })
 
@@ -41,9 +48,16 @@ local button_next = wibox.widget({
 	widget = wibox.container.background,
 	bg = beautiful.background,
 	{
-		widget = wibox.widget.textbox,
-		text = "🢂",
-		font = beautiful.font .. " 20",
+		widget = wibox.container.margin,
+		forced_height = dpi(28),
+		forced_width = dpi(28),
+		{
+			widget = wibox.widget.imagebox,
+			image = gears.color.recolor_image(beautiful.icon_float_right, beautiful.foreground),
+			valign = "center",
+			halign = "center",
+			resize = true
+		}
 	},
 })
 
@@ -54,10 +68,17 @@ local function decorate_cell(widget, flag, date)
 	end
 	if flag == "header" then
 		return wibox.widget({
-			layout = wibox.layout.align.horizontal,
-			button_back,
-			widget,
-			button_next,
+			widget = wibox.container.margin,
+			margins = {
+				top = dpi(5)
+			},
+			{
+				layout = wibox.layout.align.horizontal,
+				button_back,
+				widget,
+				button_next,				
+			}
+
 		})
 	end
 	if flag == "monthheader" and not styles.monthheader then
@@ -139,11 +160,12 @@ local label = wibox.widget({
 })
 
 local notifs_clear = wibox.widget({
-	markup = "<span foreground='" .. beautiful.accent .. "'> </span>",
-	align = "center",
+	image = gears.color.recolor_image(beautiful.icon_float_trash, beautiful.accent),
 	valign = "center",
-	font = beautiful.font .. " 13",
-	widget = wibox.widget.textbox,
+	halign = "center",
+	forced_height = dpi(20),
+	forced_width = dpi(20),
+	widget = wibox.widget.imagebox,
 })
 
 notifs_clear:buttons(gears.table.join(awful.button({}, 1, function()
@@ -395,8 +417,8 @@ local calendar_widget = awful.popup({
 	ontop = true,
 	border_width = beautiful.border_width,
 	border_color = beautiful.border_color_normal,
-	minimum_height = dpi(446),
-	maximum_height = dpi(446),
+	minimum_height = dpi(440),
+	maximum_height = dpi(440),
 	minimum_width = dpi(310),
 	placement = function(d)
 		awful.placement.top(d, {

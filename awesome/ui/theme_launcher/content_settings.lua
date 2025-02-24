@@ -38,15 +38,25 @@ local create_btn_tooltip = function(widget, tooltip_text)
 	})
 end
 
-local create_shift_text_icon = function(icon, tooltip_text)
+local create_shift_image = function(image, tooltip_text)
 	local widget = wibox.widget({
-		widget = wibox.widget.textbox,
+
+		widget = wibox.container.margin,
+		margins = {
+			left = dpi(6),
+			right = dpi(6),
+			top = dpi(6),
+			bottom = dpi(6)
+		},
 		forced_height = dpi(50),
 		forced_width = dpi(50),
-		text = icon,
-		font = beautiful.font .. " 32",
-		halign = "center",
-		valign = "center",
+		{
+			widget = wibox.widget.imagebox,
+			halign = "center",
+			valign = "center",
+			image = image,
+			resize = true
+		},
 	})
 	create_btn_tooltip(widget, tooltip_text)
 	return widget
@@ -112,13 +122,13 @@ local set_toggle_btn_state = function(btn, toggle_on)
 	if toggle_on == true then
 		btn.border_color = beautiful.green
 		btn.widget.widget:set_bg(beautiful.green)
-		btn.widget.widget.widget.text = "󰄬"
+		btn.widget.widget.widget.image = gears.color.recolor_image(beautiful.icon_float_yes_small, beautiful.foreground)
 		btn.widget.left = dpi(25)
 		btn.widget.right = dpi(2)
 	else
 		btn.border_color = beautiful.red
 		btn.widget.widget:set_bg(beautiful.red)
-		btn.widget.widget.widget.text = "  "
+		btn.widget.widget.widget.image = gears.color.recolor_image(beautiful.icon_float_no_small, beautiful.foreground)
 		btn.widget.left = dpi(2)
 		btn.widget.right = dpi(25)
 	end
@@ -141,10 +151,11 @@ local create_toggle_btn = function(args) --value, setting_name, callback_off, ca
 				widget = wibox.container.background,
 				fg = beautiful.foreground,
 				{
-					widget = wibox.widget.textbox,
+					widget = wibox.widget.imagebox,
 					forced_height = dpi(23),
 					forced_width = dpi(23),
-					text = "  ",
+					image = gears.color.recolor_image(beautiful.icon_float_no_small, beautiful.foreground),
+					resize = true,
 					halign = "center",
 					valign = "center",
 				},
@@ -203,9 +214,21 @@ local create_setting_wrapper = function(args)
 					valign = "center",
 					halign = "left",
 					{
-						widget = wibox.widget.textbox,
-						text = args.setting_icon,
-						font = beautiful.font .. " 18",
+						widget = wibox.container.margin,
+						margins = {
+							left = dpi(0),
+							right = dpi(20),
+						},
+						{
+							widget = wibox.widget.imagebox,
+							image = args.setting_icon,
+							valign = "center",
+							halign = "center",
+							resize = true,		
+							forced_height = dpi(30),
+							forced_width = dpi(30)	
+						}
+
 					},
 				},
 				{
@@ -230,7 +253,7 @@ local create_setting_wrapper = function(args)
 end
 
 local setting_toggle_opacity = create_setting_wrapper({
-	setting_icon = "󱡔  ",
+	setting_icon = gears.color.recolor_image(beautiful.icon_float_opacity, beautiful.foreground),
 	setting_text = "Opacity",
 	height = dpi(60),
 	setting_btn = create_toggle_btn({
@@ -306,7 +329,7 @@ client.connect_signal("request::manage", function(c)
 end)
 
 local setting_toggle_titlebars = create_setting_wrapper({
-	setting_icon = "󰖯  ",
+	setting_icon = gears.color.recolor_image(beautiful.icon_float_titlebar, beautiful.foreground),
 	setting_text = "Titlebar",
 	height = dpi(60),
 	setting_btn = create_toggle_btn({
@@ -326,32 +349,32 @@ local setting_toggle_titlebars = create_setting_wrapper({
 })
 
 local setting_shift_titlebars = create_setting_wrapper({
-	setting_icon = "󰢤  ",
+	setting_icon = gears.color.recolor_image(beautiful.icon_float_border, beautiful.foreground),
 	setting_text = "Titlebar position",
 	height = dpi(80),
 	setting_btn = create_shift_btn({
 		last_shift_number = current_settings.setting_titlebars_position_number or 1,
 		shift_list = {
 			{
-				create_shift_text_icon("󰢦 ", "Top"),
+				create_shift_image(gears.color.recolor_image(beautiful.icon_float_border_top, beautiful.foreground), "Top"),
 				function()
 					reset_titlebars(1, "top")
 				end,
 			},
 			{
-				create_shift_text_icon("󰢥 ", "Right"),
+				create_shift_image(gears.color.recolor_image(beautiful.icon_float_border_right, beautiful.foreground), "Right"),
 				function()
 					reset_titlebars(2, "right")
 				end,
 			},
 			{
-				create_shift_text_icon("󰢢 ", "Bottom"),
+				create_shift_image(gears.color.recolor_image(beautiful.icon_float_border_bottom, beautiful.foreground), "Bottom"),
 				function()
 					reset_titlebars(3, "bottom")
 				end,
 			},
 			{
-				create_shift_text_icon("󰢣 ", "Left"),
+				create_shift_image(gears.color.recolor_image(beautiful.icon_float_border_left, beautiful.foreground), "Left"),
 				function()
 					reset_titlebars(4, "left")
 				end,
@@ -369,38 +392,38 @@ local set_rofi_style = function(style)
 end
 
 local setting_shift_rofi_style = create_setting_wrapper({
-	setting_icon = "󱇙  ",
+	setting_icon = gears.color.recolor_image(beautiful.icon_float_app_launcher, beautiful.foreground),
 	setting_text = "App launcher style",
 	height = dpi(80),
 	setting_btn = create_shift_btn({
 		last_shift_number = current_settings.setting_rofi_style_position_number or 1,
 		shift_list = {
 			{
-				create_shift_text_icon("󰎦 ", "Minimal"),
+				create_shift_image(gears.color.recolor_image(beautiful.icon_float_num_1, beautiful.foreground), "Minimal"),
 				function()
 					set_rofi_style(1)
 				end,
 			},
 			{
-				create_shift_text_icon("󰎩 ", "Minimal with icon"),
+				create_shift_image(gears.color.recolor_image(beautiful.icon_float_num_2, beautiful.foreground), "Minimal with icon"),
 				function()
 					set_rofi_style(2)
 				end,
 			},
 			{
-				create_shift_text_icon("󰎬 ", "Middle"),
+				create_shift_image(gears.color.recolor_image(beautiful.icon_float_num_3, beautiful.foreground), "Middle"),
 				function()
 					set_rofi_style(3)
 				end,
 			},
 			{
-				create_shift_text_icon("󰎮 ", "Fullscreen"),
+				create_shift_image(gears.color.recolor_image(beautiful.icon_float_num_4, beautiful.foreground), "Fullscreen"),
 				function()
 					set_rofi_style(4)
 				end,
 			},
 			{
-				create_shift_text_icon("󰎰 ", "Like windows"),
+				create_shift_image(gears.color.recolor_image(beautiful.icon_float_num_5, beautiful.foreground), "Like windows"),
 				function()
 					set_rofi_style(5)
 				end,
@@ -419,7 +442,7 @@ local set_layout = function(selected_layout, pos)
 end
 
 local setting_shift_layouts = create_setting_wrapper({
-	setting_icon = "   ",
+	setting_icon = gears.color.recolor_image(beautiful.icon_float_layout, beautiful.foreground),
 	setting_text = "Current layout",
 	height = dpi(80),
 	setting_btn = create_shift_btn({

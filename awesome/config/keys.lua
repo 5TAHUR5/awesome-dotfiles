@@ -74,12 +74,20 @@ awful.keyboard.append_global_keybindings({
 	awful.key({}, "XF86AudioPlay", function()
 		playerctl:play_pause()
 	end),
+
 	awful.key({}, "XF86AudioPrev", function()
-		playerctl:previous()
+		awesome.emit_signal("player::set_position", -5)
 	end),
 	awful.key({}, "XF86AudioNext", function()
-		playerctl:next()
+		awesome.emit_signal("player::set_position", 5)
 	end),
+
+	--awful.key({}, "XF86AudioPrev", function()
+	--	playerctl:previous()
+	--end),
+	--awful.key({}, "XF86AudioNext", function()
+	--	playerctl:next()
+	--end),
 
 	-- brightness up/down --
 

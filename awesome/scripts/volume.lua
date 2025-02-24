@@ -10,15 +10,7 @@ function update_volume()
 		local value = string.match(stdout, "(%d?%d?%d)%%")
 		local muted = string.match(stdout, "%[(o%D%D?)%]")
 		value = tonumber(value)
-		local icon = ""
-		if muted == "off" then
-			icon = "󰖁 "
-		elseif value <= 50 then
-			icon = " "
-		elseif value <= 100 then
-			icon = "󰕾 "
-		end
-		awesome.emit_signal("volume::get_volume", value, icon)
+		awesome.emit_signal("volume::get_volume", value, muted)
 	end)
 end
 

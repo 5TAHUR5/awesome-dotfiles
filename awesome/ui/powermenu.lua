@@ -1,13 +1,15 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+local gears = require("gears")
+local dpi = require("beautiful").xresources.apply_dpi
 require("ui.lock")
 
 local elements = {
-	{"suspend", command = "awesome-client 'lockscreen()'", icon = ""},
-	{"exit", command = "awesome-client 'awesome.quit()'", icon = "󰗼 "},
-	{"reboot", command = "reboot", icon = " "},
-	{"poweroff", command = "shutdown now", icon = "󰤆 "},
+	{"suspend", command = "awesome-client 'lockscreen()'", image = beautiful.icon_float_lock},
+	{"exit", command = "awesome-client 'awesome.quit()'", image = beautiful.icon_float_exit},
+	{"reboot", command = "reboot", image = beautiful.icon_float_reboot},
+	{"poweroff", command = "shutdown now", image = beautiful.icon_float_poweroff},
 }
 
 local elements_container = wibox.widget {
@@ -84,11 +86,23 @@ local function add_elements()
 				end)
 			},
 			{
-				widget = wibox.widget.textbox,
-				fg = beautiful.fg,
-				align = "center",
-				font = beautiful.font.." 38",
-				markup = element.icon
+				widget = wibox.container.margin,
+				margins = {
+					left = dpi(20),
+					right = dpi(20),
+					top = dpi(20),
+					bottom = dpi(20)
+				},
+				{
+					id = "icon",
+					widget = wibox.widget.imagebox,
+					valign = "center",
+					halign = "center",
+					forced_height = dpi(20),
+					forced_width = dpi(20),
+					image = gears.color.recolor_image(element.image, beautiful.foreground)					
+				}
+
 			}
 		}
 
@@ -96,7 +110,7 @@ local function add_elements()
 
 		if i == index_element then
 			element_widget.bg = beautiful.accent
-			element_widget.fg = beautiful.background
+			element_widget:get_children_by_id("icon")[1].image = gears.color.recolor_image(element.image, beautiful.background)
 		end
 
 	end

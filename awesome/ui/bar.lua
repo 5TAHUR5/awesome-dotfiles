@@ -7,28 +7,6 @@ local naughty = require("naughty")
 local dpi = require("beautiful").xresources.apply_dpi
 require("scripts.init")
 
-local create_widget_icontext = function(icon)
-	return wibox.widget({
-		widget = wibox.container.background,
-		bg = beautiful.accent,
-		fg = beautiful.background_alt,
-		border_width = 1,
-		border_color = beautiful.accent,
-		{
-			widget = wibox.container.margin,
-			margins = {
-				left = dpi(8),
-				right = dpi(8),
-			},
-			{
-				widget = wibox.widget.textbox,
-				font = "15",
-				text = icon,
-			},
-		},
-	})
-end
-
 screen.connect_signal("request::desktop_decoration", function(s)
 	-- clock -----------------------------
 
@@ -36,7 +14,26 @@ screen.connect_signal("request::desktop_decoration", function(s)
 		layout = wibox.layout.fixed.horizontal,
 		fill_space = true,
 		{
-			widget = create_widget_icontext(beautiful.icon_calendar),
+			widget = wibox.container.background,
+			bg = beautiful.accent,
+			fg = beautiful.background_alt,
+			border_width = 1,
+			border_color = beautiful.accent,
+			{
+				widget = wibox.container.margin,
+				margins = {
+					left = dpi(5),
+					right = dpi(5),
+				},
+				{
+					widget = wibox.widget.imagebox(),
+					image = gears.color.recolor_image(beautiful.icon_bar_calendar, beautiful.background),
+					forced_height = dpi(20),
+					forced_width = dpi(20),
+					valign = "center",
+					halign = "center",
+				},
+			},	
 		},
 		{
 			widget = wibox.container.background,
@@ -59,7 +56,26 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			},
 		},
 		{
-			widget = create_widget_icontext(beautiful.icon_clock),
+			widget = wibox.container.background,
+			bg = beautiful.accent,
+			fg = beautiful.background_alt,
+			border_width = 1,
+			border_color = beautiful.accent,
+			{
+				widget = wibox.container.margin,
+				margins = {
+					left = dpi(5),
+					right = dpi(5),
+				},
+				{
+					widget = wibox.widget.imagebox(),
+					image = gears.color.recolor_image(beautiful.icon_bar_clock, beautiful.background),
+					forced_height = dpi(22),
+					forced_width = dpi(22),
+					valign = "center",
+					halign = "center",
+				},
+			},	
 		},
 	})
 
@@ -81,25 +97,23 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- battery ------------------------------
 
 	local bat_perc = wibox.widget.textbox()
-	local bat_icon = wibox.widget.textbox()
-	bat_icon.font = "15"
+	local bat_icon = wibox.widget.imagebox()
 
 	awesome.connect_signal("bat::state", function(state, value)
 		bat_perc.text = value
+
 		if state == "Charging" or state == "Full" then
-			bat_icon.text = "󰂄"
-		elseif value == 100 then
-			bat_icon.text = "󰁹"
-		elseif value > 90 then
-			bat_icon.text = "󰂂"
-		elseif value > 70 then
-			bat_icon.text = "󰂀"
-		elseif value > 50 then
-			bat_icon.text = "󰁾"
-		elseif value > 30 then
-			bat_icon.text = "󰁽"
+			bat_icon.image = gears.color.recolor_image(beautiful.icon_bar_battery_charging, beautiful.background)
+		elseif value > 85 then
+			bat_icon.image = gears.color.recolor_image(beautiful.icon_bar_battery_100, beautiful.background)
+		elseif value > 65 then
+			bat_icon.image = gears.color.recolor_image(beautiful.icon_bar_battery_75, beautiful.background)
+		elseif value > 35 then
+			bat_icon.image = gears.color.recolor_image(beautiful.icon_bar_battery_50, beautiful.background)
+		elseif value > 10 then
+			bat_icon.image = gears.color.recolor_image(beautiful.icon_bar_battery_25, beautiful.background)
 		else
-			bat_icon.text = "󰁻"
+			bat_icon.image = gears.color.recolor_image(beautiful.icon_bar_battery_low, beautiful.background)
 		end
 	end)
 
@@ -111,9 +125,15 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			fg = beautiful.background,
 			{
 				widget = wibox.container.margin,
-				left = dpi(8),
-				right = dpi(8),
-				bat_icon,
+				left = dpi(4),
+				right = dpi(4),
+				{
+					widget = bat_icon,
+					forced_height = dpi(20),
+					forced_width = dpi(25),
+					valign = "center",
+					halign = "center",					
+				}
 			},
 		},
 		{
@@ -133,30 +153,28 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 	-- keyboard layout --------------------------
 
-	local numlockstatus = wibox.widget.textbox()
-	numlockstatus.font = "15"
-	numlockstatus.text = "󱧓 "
+	local numlockstatus = wibox.widget.imagebox()
+	numlockstatus.image = gears.color.recolor_image(beautiful.icon_bar_num_off, beautiful.accent)
 
 	awesome.connect_signal("numlock::toggle", function()
 		awful.spawn.easy_async({ "sh", "-c", [[sleep 0.1 && xset q | awk '/Num/{print $8}']] }, function(stdout)
 			if string.sub(stdout, 2, 2) == "n" then
-				numlockstatus.text = "󰎠 "
+				numlockstatus.image = gears.color.recolor_image(beautiful.icon_bar_num_on, beautiful.accent)
 			else
-				numlockstatus.text = "󱧓 "
+				numlockstatus.image = gears.color.recolor_image(beautiful.icon_bar_num_off, beautiful.accent)
 			end
 		end)
 	end)
 
-	local capslockstatus = wibox.widget.textbox()
-	capslockstatus.font = "15"
-	capslockstatus.text = "󰬵 "
+	local capslockstatus = wibox.widget.imagebox()
+	capslockstatus.image = gears.color.recolor_image(beautiful.icon_bar_caps_lock_off, beautiful.accent)
 
 	awesome.connect_signal("capslock::toggle", function()
 		awful.spawn.easy_async({ "sh", "-c", [[sleep 0.1 && xset q | awk '/Caps/{print $4}']] }, function(stdout)
 			if string.sub(stdout, 2, 2) == "n" then
-				capslockstatus.text = "󰬶 "
+				capslockstatus.image = gears.color.recolor_image(beautiful.icon_bar_caps_lock_on, beautiful.accent)
 			else
-				capslockstatus.text = "󰬵 "
+				capslockstatus.image = gears.color.recolor_image(beautiful.icon_bar_caps_lock_off, beautiful.accent)
 			end
 		end)
 	end)
@@ -171,7 +189,26 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	local keyboard = wibox.widget({
 		layout = wibox.layout.fixed.horizontal,
 		{
-			widget = create_widget_icontext(beautiful.icon_keyboard),
+			widget = wibox.container.background,
+			bg = beautiful.accent,
+			fg = beautiful.background_alt,
+			border_width = 1,
+			border_color = beautiful.accent,
+			{
+				widget = wibox.container.margin,
+				margins = {
+					left = dpi(5),
+					right = dpi(5),
+				},
+				{
+					widget = wibox.widget.imagebox(),
+					image = gears.color.recolor_image(beautiful.icon_bar_keyboard, beautiful.background),
+					forced_height = dpi(24),
+					forced_width = dpi(24),
+					valign = "center",
+					halign = "center",
+				},
+			},	
 		},
 		{
 			widget = wibox.container.background,
@@ -192,11 +229,18 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			fg = beautiful.accent,
 			border_width = 1,
 			border_color = beautiful.accent,
+			forced_height = dpi(30),
 			{
 				widget = wibox.container.margin,
-				left = dpi(8),
-				right = dpi(8),
-				numlockstatus,
+				left = dpi(6),
+				right = dpi(6),
+				{
+					widget = numlockstatus,
+					forced_height = dpi(20),
+					forced_width = dpi(20),
+					valign = "center",
+					halign = "center",
+				}
 			},
 			buttons = {
 				awful.button({}, 1, function()
@@ -212,9 +256,15 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			border_color = beautiful.accent,
 			{
 				widget = wibox.container.margin,
-				left = dpi(8),
-				right = dpi(8),
-				capslockstatus,
+				left = dpi(6),
+				right = dpi(6),
+				{
+					widget = capslockstatus,
+					forced_height = dpi(18),
+					forced_width = dpi(18),
+					valign = "center",
+					halign = "center",
+				}
 			},
 			buttons = {
 				awful.button({}, 1, function()
@@ -227,14 +277,20 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- volume ------------------------------
 
 	local volume_perc = wibox.widget.textbox()
-	local volume_icon = wibox.widget.textbox()
+	local volume_icon = wibox.widget.imagebox()
 	volume_perc.halign = "center"
-	volume_icon.halign = "center"
-	volume_icon.font = beautiful.font .. " 13"
+	-- volume_icon.halign = "center"
+	-- volume_icon.font = beautiful.font .. " 13"
 
-	awesome.connect_signal("volume::get_volume", function(value, icon)
+	awesome.connect_signal("volume::get_volume", function(value, muted)
 		volume_perc.text = value
-		volume_icon.text = icon
+		if muted == "off" then
+			volume_icon.image = gears.color.recolor_image(beautiful.icon_bar_speaker_mute, beautiful.background)
+		elseif value > 49 then
+			volume_icon.image = gears.color.recolor_image(beautiful.icon_bar_speaker_full, beautiful.background)
+		else
+			volume_icon.image = gears.color.recolor_image(beautiful.icon_bar_speaker_low, beautiful.background)
+		end
 	end)
 
 	local volume = wibox.widget({
@@ -257,11 +313,15 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			{
 				widget = wibox.container.margin,
 				margins = {
-					left = dpi(8),
+					left = dpi(6),
 					right = dpi(6),
 				},
 				{
 					widget = volume_icon,
+					halign = "center",
+					valign = "center",
+					forced_height = dpi(17),
+					forced_width = dpi(17),	
 				},
 			},
 		},
@@ -287,11 +347,15 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	-- microphone ------------------------------
 
 	local microphone_perc = wibox.widget.textbox()
-	local microphone_icon = wibox.widget.textbox()
+	local microphone_icon = wibox.widget.imagebox()
 
-	awesome.connect_signal("capture::get_capture", function(value, icon, toggle)
+	awesome.connect_signal("capture::get_capture", function(value, toggle)
 		microphone_perc.text = value
-		microphone_icon.text = icon
+		if toggle == "off" then
+			microphone_icon.image = gears.color.recolor_image(beautiful.icon_bar_microphone_mute, beautiful.background)
+		else
+			microphone_icon.image = gears.color.recolor_image(beautiful.icon_bar_microphone, beautiful.background)
+		end
 	end)
 
 	local microphone = wibox.widget({
@@ -313,10 +377,16 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			fg = beautiful.background,
 			forced_width = dpi(30),
 			{
-				widget = microphone_icon,
-				halign = "center",
-				valign = "center",
-				font = beautiful.font .. " 16",
+				widget = wibox.container.margin,
+				left = dpi(6),
+				right = dpi(6),
+				{
+					widget = microphone_icon,
+					halign = "center",
+					valign = "center",
+					forced_height = dpi(5),
+					forced_width = dpi(5),				
+				}
 			},
 		},
 		{
@@ -358,7 +428,26 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			end),
 		},
 		{
-			widget = create_widget_icontext("󰃠 "),
+			widget = wibox.container.background,
+			bg = beautiful.accent,
+			fg = beautiful.background_alt,
+			border_width = 1,
+			border_color = beautiful.accent,
+			{
+				widget = wibox.container.margin,
+				margins = {
+					left = dpi(5),
+					right = dpi(5),
+				},
+				{
+					widget = wibox.widget.imagebox(),
+					image = gears.color.recolor_image(beautiful.icon_bar_bright, beautiful.background),
+					forced_height = dpi(22),
+					forced_width = dpi(22),
+					valign = "center",
+					halign = "center",
+				},
+			},	
 		},
 		{
 			widget = wibox.container.background,
@@ -388,10 +477,12 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			halign = "center",
 			valign = "center",
 			{
-				widget = wibox.widget.textbox,
-				forced_width = dpi(17),
-				font = "13",
-				text = "",
+				widget = wibox.widget.imagebox,
+				image = gears.color.recolor_image(beautiful.icon_bar_bell, beautiful.accent),
+				forced_height = dpi(20),
+				forced_width = dpi(20),
+				valign = "center",
+				halign = "center",
 			},
 		},
 	})
@@ -401,10 +492,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
 	awesome.connect_signal("signal::dnd", function()
 		dnd = not dnd
 		if not dnd then
-			dnd_button.widget.widget.text = ""
+			dnd_button.widget.widget.image = gears.color.recolor_image(beautiful.icon_bar_bell_slash, beautiful.accent)
 			naughty.suspend()
 		else
-			dnd_button.widget.widget.text = ""
+			dnd_button.widget.widget.image = gears.color.recolor_image(beautiful.icon_bar_bell, beautiful.accent)
 			naughty.resume()
 		end
 	end)
@@ -556,28 +647,35 @@ screen.connect_signal("request::desktop_decoration", function(s)
 			},
 			{
 				widget = wibox.container.background,
-				forced_width = dpi(33),
+				forced_width = dpi(30),
 				bg = beautiful.accent,
 				fg = beautiful.background_alt,
 				{
-					widget = wibox.widget.textbox,
-					id = "button",
-					text = beautiful.icon_left_arrow,
-					font = beautiful.font .. " 21",
-					halign = "center",
-					valign = "center",
+					widget = wibox.container.margin,
+					left = dpi(6),
+					right = dpi(6),
+					{
+						widget = wibox.widget.imagebox,
+						id = "button",
+						image = gears.color.recolor_image(beautiful.icon_bar_arrow_left, beautiful.background),
+						halign = "center",
+						valign = "center",
+						forced_height = dpi(20),
+						forced_width = dpi(20),				
+					}
 				},
-			},
+			}
+
 		},
 	})
 	local tray_visible = false
 
 	awesome.connect_signal("summon::systray", function()
 		if not tray_visible then
-			tray:get_children_by_id("button")[1].text = beautiful.icon_right_arrow
+			tray:get_children_by_id("button")[1].image = gears.color.recolor_image(beautiful.icon_bar_arrow_right, beautiful.background)
 			tray:get_children_by_id("tray")[1]:insert(1, tray_widget)
 		else
-			tray:get_children_by_id("button")[1].text = beautiful.icon_left_arrow
+			tray:get_children_by_id("button")[1].image = gears.color.recolor_image(beautiful.icon_bar_arrow_left, beautiful.background)
 			tray:get_children_by_id("tray")[1]:remove(1)
 		end
 		tray_visible = not tray_visible

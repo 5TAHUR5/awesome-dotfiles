@@ -49,7 +49,9 @@ local create_color_schemes_btn = function(text)
         widget = wibox.widget.background,
         forced_width = dpi(150),
         forced_height = dpi(35),
-        bg = beautiful.background_urgent,
+        border_width = beautiful.border_width,
+        border_color = beautiful.background_accent,
+        bg = beautiful.background_alt,
         {
             widget = wibox.container.margin,
             margins = dpi(5),
@@ -62,8 +64,8 @@ local create_color_schemes_btn = function(text)
     }
 end
 
-local apply_scheme_btn = create_color_schemes_btn("  Apply")
-local theme_how_sys_btn = create_color_schemes_btn("  Awesome theme")
+local apply_scheme_btn = create_color_schemes_btn("APPLY")
+local theme_how_sys_btn = create_color_schemes_btn("SYNC AWESOME THEME")
 
 
 -- schemes --
@@ -93,20 +95,20 @@ color_schemes_wrapper:buttons(gears.table.join(
 ))
 
 local set_selectable_scheme = function(theme_name)
-    theme_how_sys_btn:set_bg(beautiful.background_urgent)
+    theme_how_sys_btn:set_bg(beautiful.background_alt)
     selectable_theme_name = theme_name
     for _, scheme in ipairs(color_schemes_wrapper.children) do
         if scheme.widget.widget.children[1].text == theme_name then 
-            scheme.border_color = beautiful.background_accent
-        else
             scheme.border_color = beautiful.background_urgent
+        else
+            scheme.border_color = beautiful.background_alt
         end
     end
 end
 
 set_selectable_scheme(last_alacritty_theme)
 if last_alacritty_theme == "theme_how_system" then
-    theme_how_sys_btn:set_bg(beautiful.background_accent)
+    theme_how_sys_btn:set_bg(beautiful.background_urgent)
 end
 
 local create_color_box = function(color)
@@ -156,7 +158,7 @@ local create_scheme_box = function(scheme)
         bg = scheme.background_alt,
         fg = scheme.foreground,
         border_width = 5,
-        border_color = beautiful.background_urgent,
+        border_color = beautiful.background_alt,
         forced_width = dpi(480),
         forced_height = dpi(50),
         {
@@ -195,7 +197,7 @@ end)
 theme_how_sys_btn:buttons {
     awful.button({ }, 1, function()
         set_selectable_scheme("theme_how_system")
-        theme_how_sys_btn:set_bg(beautiful.background_accent)
+        theme_how_sys_btn:set_bg(beautiful.background_urgent)
 	end)
 }
 
